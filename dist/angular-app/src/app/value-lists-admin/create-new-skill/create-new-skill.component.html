@@ -1,0 +1,27 @@
+
+<section class="new-skill" fxLayout fxLayoutAlign="center">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)"> 
+      <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex="420px">
+          <mat-card-title fxLayoutAlign="center">Create a new skill</mat-card-title>
+          <mat-card-content fxLayout="column" fxLayoutAlign="center">
+                  <mat-form-field>
+                      <input 
+                        matInput 
+                        ngModel 
+                        #nameInput="ngModel" 
+                        name="name" 
+                        type="text" 
+                        placeholder="Name of Skill" 
+                        required>
+                      <mat-error *ngIf="nameInput.hasError('required')">
+                        Name of skill is required.
+                      </mat-error>   
+                  </mat-form-field>
+          </mat-card-content>       
+          <mat-card-actions>
+              <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>          
+          </mat-card-actions>
+      </mat-card>  
+    </form>
+</section>
+  

@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign="space-around" fxLayoutAlign.gt-md="space-around" fxLayoutGap="40px" fxLayoutGap.gt-md="10px">
+    <section class="skills">
+        <app-create-new-skill></app-create-new-skill>
+        <div class="gap"></div> 
+        <app-skills-list></app-skills-list>
+    </section>
+    <mat-divider></mat-divider>                   
+    <section class="consultant-companies">
+        <app-create-new-company></app-create-new-company>
+        <div class="gap">
+            <mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
+        </div> 
+        <app-companies-list></app-companies-list>
+    </section>
+    <mat-divider></mat-divider>  
+    <section class="client-companies">
+        <app-create-new-client-company></app-create-new-client-company>
+        <div class="gap"></div> 
+        <app-client-companies-list></app-client-companies-list>
+    </section>
+</div>
+
+
+
+

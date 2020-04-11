@@ -1,0 +1,13 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+    <mat-dialog-content>
+     
+      <h3 class="header">{{data.projectName}}</h3>
+      <p *ngIf="!data.projectDescription">There are no further details available for this project reference.</p>
+      <p>{{data.projectDescription}}</p>
+     
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-raised-button color="primary" [mat-dialog-close]>Close</button>   
+    </mat-dialog-actions>
+</section>
+  

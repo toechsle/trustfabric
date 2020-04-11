@@ -1,0 +1,92 @@
+<div class="container">
+  
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+      <strong>Error:</strong> {{errorMessage}}
+  </div>
+
+  <div fxLayoutAlign="center center">
+    <mat-form-field fxFlex="40%" class="filter">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+ 
+  <div class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Proposed Projects </th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="projectLeader">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Leader </th>
+        <td mat-cell *matCellDef="let row"> {{row.projectLeader}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="consultants">
+        <th mat-header-cell *matHeaderCellDef> Consultants </th>
+        <td mat-cell *matCellDef="let row"> {{row.consultants}} </td>
+      </ng-container> 
+
+      <ng-container matColumnDef="addRemConsultants">
+        <th mat-header-cell *matHeaderCellDef class="addRemConsultants"> Add/Remove Consultants </th>
+        <td mat-cell *matCellDef="let row" class="addRemConsultants"> 
+          <button mat-icon-button matTooltip="Add consultants to the project" (click)="openAddConsultantsDialog(row.id, row.name)">
+            <mat-icon aria-label="icon-button for adding a consultant">add_circle_outline</mat-icon> 
+          </button>
+          <span class="gap"></span>
+          <button mat-icon-button matTooltip="Remove consultants from the project" (click)="openRemoveConsultantsDialog(row.id, row.name)">
+            <mat-icon aria-label="icon-button for removing a consultant">remove_circle_outline</mat-icon> 
+          </button>
+
+        </td>
+      </ng-container> 
+
+      <ng-container matColumnDef="grantRemAccess">
+        <th mat-header-cell *matHeaderCellDef class="grantRemAccess"> Grant/Revoke Access </th>
+        <td mat-cell *matCellDef="let row" class="grantRemAccess"> 
+          <button mat-icon-button matTooltip="Grant clients acccess to the project" (click)="openGrantAccessDialog(row.id, row.name)">
+            <mat-icon aria-label="icon-button for granting access">group_add</mat-icon> 
+          </button>
+          <span class="gap"></span>
+          <button mat-icon-button matTooltip="Revoke acccess to the project" (click)="openRemoveAccessDialog(row.id, row.name)">
+            <mat-icon aria-label="icon-button for removing access">block</mat-icon> 
+          </button>
+        </td>
+      </ng-container> 
+
+      <ng-container matColumnDef="transform">
+        <th mat-header-cell *matHeaderCellDef class="transform"> Change Status </th>
+        <td mat-cell *matCellDef="let row" class="transform"> 
+          <button mat-icon-button matTooltip="Change the status to 'accepted'" (click)="openTransformProjectDialog(row.id, row.name)">
+            <mat-icon aria-label="icon-button with a transform icon">transform</mat-icon>
+          </button>
+        </td>
+      </ng-container> 
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef class="delete"> Delete </th>
+        <td mat-cell *matCellDef="let row" class="delete"> 
+          <button mat-icon-button (click)="openDeleteDialog(row.id, row.name)">
+            <mat-icon aria-label="icon-button with a delete icon">delete_forever</mat-icon>
+          </button>
+        </td>
+      </ng-container> 
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  </div>
+
+</div>
+

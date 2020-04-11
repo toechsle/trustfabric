@@ -1,0 +1,20 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+    <h1 mat-dialog-title >{{ data.title }}</h1>
+    <mat-dialog-content>
+      <p class="text">{{ data.text }}</p>
+      <mat-selection-list #skills [(ngModel)]="selectedSkills" (ngModelChange)="onNgModelChange()">
+        <mat-list-option *ngFor="let skill of arrayOfSkills" [value]="skill.id">
+           {{skill.name}}  {{skill.proficiency}}
+        </mat-list-option>
+      </mat-selection-list>
+        <div class="gap"></div>
+        <p>
+          Skills selected: {{skills.selectedOptions.selected.length}}
+        </p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button *ngIf="!isLoading" class="cancelButton" mat-raised-button color="primary" [mat-dialog-close]>Cancel</button>
+      <button *ngIf="!isLoading" class="submitButton" mat-raised-button color="primary" [disabled]="isDisabled" (click)="onAddClicked()">Add</button>   
+      <mat-spinner [diameter]="40" *ngIf="isLoading" class="spinner"></mat-spinner>
+    </mat-dialog-actions>
+</section>

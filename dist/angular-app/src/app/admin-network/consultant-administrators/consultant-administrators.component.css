@@ -1,0 +1,8 @@
+.gap {
+    height: 20px;
+}
+
+.spinner {
+    margin: 0 auto;
+    z-index: 999;
+}

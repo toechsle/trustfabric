@@ -1,0 +1,11 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+  <h1 mat-dialog-title >{{ data.title }}</h1>
+  <mat-dialog-content>
+    <p>{{ data.text }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button *ngIf="!isLoading" class="submitButton"  mat-raised-button color="warn" (click)="onYesClicked()">Yes</button>
+    <button *ngIf="!isLoading" class="cancelButton" mat-raised-button color="primary" [mat-dialog-close]>No</button> 
+    <mat-spinner [diameter]="40" *ngIf="isLoading" class="spinner"></mat-spinner>     
+  </mat-dialog-actions>
+</section>

@@ -1,0 +1,10 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+  <h1 mat-dialog-title >{{ data.title }}</h1>
+  <mat-dialog-content>
+    <p>{{ data.text }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button class="submitButton" mat-raised-button color="warn" [mat-dialog-close]="true">Yes</button>
+    <button class="cancelButton" mat-raised-button color="primary" [mat-dialog-close]="false">No</button> 
+  </mat-dialog-actions>
+</section>

@@ -1,0 +1,28 @@
+.cancelButton {
+    margin-left: 10px;
+    margin-right: 20px;
+    float: left;
+}
+
+.submitButton {
+    margin-left: 20px;
+    margin-right: 10px;
+    float: right;
+}
+
+.buttons {
+    padding-bottom: 10px;
+}
+
+.gap1 {
+    height: 20px;
+}
+
+.gap2 {
+    height: 30px;
+}
+
+.spinner {
+    margin: 0 auto;
+    z-index: 999;
+}

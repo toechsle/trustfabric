@@ -1,0 +1,1028 @@
+// Business Access Control Rules:
+
+
+rule ConsultantsHaveReadAccessToTheirOwnData {
+    description: "Allow consultants read access to their own data"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.Consultant"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantsCanDeleteTheirAccount {
+    description: "Allow consultants to delete their account"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: DELETE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantsHaveWriteAccessToTheirOwnMasterData {
+    description: "Allow consultants write access to their own master data"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    transaction(tx): "org.ifb.trustfabric.UpdateMasterDataOfConsultant"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantsHaveWriteAccessToTheirOwnMasterData2 {
+    description: "Allow consultants write access to their own master data"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.UpdateMasterDataOfConsultant"
+    action: ALLOW
+}
+
+rule ConsultantsHaveWriteAccessToTheirOwnImages {
+    description: "Allow consultants write access to their own images"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    transaction(tx): "org.ifb.trustfabric.UpdateImageOfConsultant"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantsHaveWriteAccessToTheirOwnImages2 {
+    description: "Allow consultants write access to their own images"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.UpdateImageOfConsultant"
+    action: ALLOW
+}
+
+rule ConsultantsHaveWriteAccessToTheirOwnLogItems {
+    description: "Allow consultants write access to their own logItems"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    transaction(tx): "org.ifb.trustfabric.AddLogItemToConsultant"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantsHaveWriteAccessToTheirOwnLogItems2{
+    description: "Allow consultants write access to their own logItems"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AddLogItemToConsultant"
+    action: ALLOW
+}
+
+rule ConsultantsCanAddTeamleaders {
+    description: "Allow consultants to add teamleaders"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    transaction(tx): "org.ifb.trustfabric.AddTeamleaderWithGivenEmailToConsultant"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantsCanAddTeamleaders2 {
+    description: "Allow consultants to add teamleaders"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.Consultant"
+    transaction(tx): "org.ifb.trustfabric.AddTeamleaderWithGivenEmailToConsultant"
+    condition: (1)
+    action: ALLOW
+}
+
+rule ConsultantsCanAddTeamleaders3 {
+    description: "Allow consultants to add teamleaders"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AddTeamleaderWithGivenEmailToConsultant"
+    action: ALLOW
+}
+
+rule ConsultantsCanRemoveTeamleaders {
+    description: "Allow consultants to remove teamleaders"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    transaction(tx): "org.ifb.trustfabric.RemoveTeamleaderFromConsultant"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantsCanRemoveTeamleaders2 {
+    description: "Allow consultants to remove teamleaders"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.RemoveTeamleaderFromConsultant"
+    action: ALLOW
+}
+
+rule ConsultantsHaveReadAccessToTheirTeamleaders {
+    description: "Allow consultants read access to their teamleaders"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.Consultant"
+    condition: (p.teamleaders && p.teamleaders.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ConsultantsHaveReadAccessToConsultantCompanies {
+    description: "Allow consultants read access to consultant companies"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: READ
+    resource: "org.ifb.trustfabric.ConsultantCompany"
+    action: ALLOW
+}
+
+rule ConsultantsHaveReadAccessToClients {
+    description: "Allow consultants read access to clients"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: READ
+    resource: "org.ifb.trustfabric.Client"
+    action: ALLOW
+}
+
+rule ConsultantsHaveReadAccessToSkills {
+    description: "Allow consultants read access to skills"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: READ
+    resource: "org.ifb.trustfabric.Skill"
+    action: ALLOW
+}
+
+rule ConsultantsHaveReadAccessToProjectReferencesBelongingToTheirProfile {
+    description: "Allow consultants read access to project references belonging to their profile"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.Project"
+    condition: (p.projects && p.projects.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ConsultantsCanAddProposedProjectsForWhichTheyAreProjectLeaderToClients {
+    description: "Allow consultants to add proposed projects, for which they are the project leader, to the list of proposed projects of a client (NB: restriction that only the project leader can add a project is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource: "org.ifb.trustfabric.Client"
+    transaction: "org.ifb.trustfabric.AddToProposedProjectsOfClient"
+    action: ALLOW
+}
+
+rule ConsultantsCanAddProposedProjectsForWhichTheyAreProjectLeaderToClients2 {
+    description: "Allow consultants to add proposed projects, for which they are the project leader, to the list of proposed projects of a client (NB: restriction that only the project leader can add a project is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AddToProposedProjectsOfClient"
+    action: ALLOW
+}
+
+rule ConsultantsCanAddAcceptedProjectsForWhichTheyAreProjectLeaderToClients {
+    description: "Allow consultants to add accepted projects, for which they are the project leader, to the list of accepted projects of a client (NB: restriction that only the project leader can add a project is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource: "org.ifb.trustfabric.Client"
+    transaction: "org.ifb.trustfabric.AddToAcceptedProjectsOfClient"
+    action: ALLOW
+}
+
+rule ConsultantsCanAddAcceptedProjectsForWhichTheyAreProjectLeaderToClients2 {
+    description: "Allow consultants to add accepted projects, for which they are the project leader, to the list of accepted projects of a client (NB: restriction that only the project leader can add a project is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AddToAcceptedProjectsOfClient"
+    action: ALLOW
+}
+
+rule ConsultantsCanRemoveProposedProjectsForWhichTheyAreProjectLeaderFromClients {
+    description: "Allow consultants to remove proposed projects, for which they are the project leader, from the list of proposed projects of a client (NB: restriction that only the project leader can remove a project is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource: "org.ifb.trustfabric.Client"
+    transaction: "org.ifb.trustfabric.RemoveFromProposedProjectsOfClient"
+    action: ALLOW
+}
+
+rule ConsultantsCanRemoveProposedProjectsForWhichTheyAreProjectLeaderFromClients2 {
+    description: "Allow consultants to remove proposed projects, for which they are the project leader, from the list of proposed projects of a client (NB: restriction that only the project leader can remove a project is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.RemoveFromProposedProjectsOfClient"
+    action: ALLOW
+}
+
+rule ConsultantsCanRemoveAcceptedProjectsForWhichTheyAreProjectLeaderFromClients {
+    description: "Allow consultants to remove accepted projects, for which they are the project leader, from the list of accepted projects of a client (NB: restriction that only the project leader can remove a project is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource: "org.ifb.trustfabric.Client"
+    transaction: "org.ifb.trustfabric.RemoveFromAcceptedProjectsOfClient"
+    action: ALLOW
+}
+
+rule ConsultantsCanRemoveAcceptedProjectsForWhichTheyAreProjectLeaderFromClients2 {
+    description: "Allow consultants to remove accepted projects, for which they are the project leader, from the list of accepted projects of a client (NB: restriction that only the project leader can remove a project is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.RemoveFromAcceptedProjectsOfClient"
+    action: ALLOW
+}
+
+rule ConsultantsCanCreateProposedProjects {
+    description: "Allow consultants to create proposed projects"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.ProposedProject"
+    action: ALLOW
+}
+
+rule ConsultantsCanCreateAcceptedProjects {
+    description: "Allow consultants to create accepted projects"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AcceptedProject"
+    action: ALLOW
+}
+
+rule ConsultantsHaveReadAccessToProposedProjectsForWhichTheyAreProjectLeader {
+    description: "Allow consultants read access to proposed projects, for which they are the project leader"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.ProposedProject"
+    condition: (r.projectLeader.getIdentifier() == p.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantsHaveReadAccessToAcceptedProjectsForWhichTheyAreProjectLeader {
+    description: "Allow consultants read access to accepted projects, for which they are the project leader"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.AcceptedProject"
+    condition: (r.projectLeader.getIdentifier() == p.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantsCanDeleteProposedProjectsForWhichTheyAreProjectLeader {
+    description: "Allow consultants to delete proposed projects, for which they are the project leader"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: DELETE
+    resource(r): "org.ifb.trustfabric.ProposedProject"
+    condition: (r.projectLeader.getIdentifier() == p.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantsCanDeleteAcceptedProjectsForWhichTheyAreProjectLeader {
+    description: "Allow consultants to delete accepted projects, for which they are the project leader"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: DELETE
+    resource(r): "org.ifb.trustfabric.AcceptedProject"
+    condition: (r.projectLeader.getIdentifier() == p.getIdentifier())
+    action: ALLOW
+}
+
+rule TeamleadersCanAddTeamMembersToProposedProjectsForWhichTheyAreProjectLeader {
+    description: "Allow teamleaders to add team members to proposed projects, for which they are the project leader (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.ProposedProject"
+    transaction(tx): "org.ifb.trustfabric.AddToConsultantsOfProposedProject"
+    condition: (r.projectLeader.getIdentifier() == p.getIdentifier())
+    action: ALLOW
+}
+
+rule TeamleadersCanAddTeamMembersToProposedProjectsForWhichTheyAreProjectLeader2 {
+    description: "Allow teamleaders to add team members to proposed projects, for which they are the project leader (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AddToConsultantsOfProposedProject"
+    action: ALLOW
+}
+
+rule TeamleadersCanAddTeamMembersToAcceptedProjectsForWhichTheyAreProjectLeader {
+    description: "Allow teamleaders to add team members to accepted projects, for which they are the project leader (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.AcceptedProject"
+    transaction(tx): "org.ifb.trustfabric.AddToConsultantsOfAcceptedProject"
+    condition: (r.projectLeader.getIdentifier() == p.getIdentifier())
+    action: ALLOW
+}
+
+rule TeamleadersCanAddTeamMembersToAcceptedProjectsForWhichTheyAreProjectLeader2 {
+    description: "Allow teamleaders to add team members to accepted projects, for which they are the project leader (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AddToConsultantsOfAcceptedProject"
+    action: ALLOW
+}
+
+rule TeamleadersCanRemoveTeamMembersFromProposedProjectsForWhichTheyAreProjectLeader {
+    description: "Allow teamleaders to remove team members from proposed projects, for which they are the project leader (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.ProposedProject"
+    transaction(tx): "org.ifb.trustfabric.RemoveFromConsultantsOfProposedProject"
+    condition: (r.projectLeader.getIdentifier() == p.getIdentifier())
+    action: ALLOW
+}
+
+rule TeamleadersCanRemoveTeamMembersFromProposedProjectsForWhichTheyAreProjectLeader2 {
+    description: "Allow teamleaders to remove team members from proposed projects, for which they are the project leader (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.RemoveFromConsultantsOfProposedProject"
+    action: ALLOW
+}
+
+rule TeamleadersCanRemoveTeamMembersFromAcceptedProjectsForWhichTheyAreProjectLeader {
+    description: "Allow teamleaders to remove team members from accepted projects, for which they are the project leader (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.AcceptedProject"
+    transaction(tx): "org.ifb.trustfabric.RemoveFromConsultantsOfAcceptedProject"
+    condition: (r.projectLeader.getIdentifier() == p.getIdentifier())
+    action: ALLOW
+}
+
+rule TeamleadersCanRemoveTeamMembersFromAcceptedProjectsForWhichTheyAreProjectLeader2 {
+    description: "Allow teamleaders to remove team members from accepted projects, for which they are the project leader (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.RemoveFromConsultantsOfAcceptedProject"
+    action: ALLOW
+}
+
+rule TeamleadersCanAddTeamMembersToReadableConsultantsListOfClients {
+    description: "Allow teamleaders to add team members to the 'readableConsultants' list of clients (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource: "org.ifb.trustfabric.Client"
+    transaction: "org.ifb.trustfabric.AddToReadableConsultantsOfClient"
+    action: ALLOW
+}
+
+rule TeamleadersCanAddTeamMembersToReadableConsultantsListOfClients2 {
+    description: "Allow teamleaders to add team members to the 'readableConsultants' list of clients (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AddToReadableConsultantsOfClient"
+    action: ALLOW
+}
+
+rule TeamleadersCanAddTeamMembersToWritableConsultantsListOfClients {
+    description: "Allow teamleaders to add team members to the 'writableConsultants' list of clients (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource: "org.ifb.trustfabric.Client"
+    transaction: "org.ifb.trustfabric.AddToWritableConsultantsOfClient"
+    action: ALLOW
+}
+
+rule TeamleadersCanAddTeamMembersToWritableConsultantsListOfClients2 {
+    description: "Allow teamleaders to add team members to the 'writableConsultants' list of clients (NB: restriction that teamleaders can do this only for team members is implemented programmatically)"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AddToWritableConsultantsOfClient"
+    action: ALLOW
+}
+
+rule TeamleadersCanRemoveTeamMembersFromReadableConsultantsListOfClients {
+    description: "Allow teamleaders to remove team members from the 'readableConsultants' list of clients"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource: "org.ifb.trustfabric.Client"
+    transaction: "org.ifb.trustfabric.RemoveFromReadableConsultantsOfClient"
+    action: ALLOW
+}
+
+rule TeamleadersCanRemoveTeamMembersFromReadableConsultantsListOfClients2 {
+    description: "Allow teamleaders to remove team members from the 'readableConsultants' list of clients"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.RemoveFromReadableConsultantsOfClient"
+    action: ALLOW
+}
+
+rule TeamleadersCanRemoveTeamMembersFromWritableConsultantsListOfClients {
+    description: "Allow teamleaders to remove team members from the 'writableConsultants' list of clients"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource: "org.ifb.trustfabric.Client"
+    transaction: "org.ifb.trustfabric.RemoveFromWritableConsultantsOfClient"
+    action: ALLOW
+}
+
+rule TeamleadersCanRemoveTeamMembersFromWritableConsultantsListOfClients2 {
+    description: "Allow teamleaders to remove team members from the 'writableConsultants' list of clients"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.RemoveFromWritableConsultantsOfClient"
+    action: ALLOW
+}
+
+rule TeamleadersHaveReadAccessToDataOnTheirTeamMembers {
+    description: "Allow teamleaders read access to data on their team members"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.Consultant"
+    condition: (r.teamleaders && r.teamleaders.toString().indexOf(p.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule TeamleadersHaveWriteAccessToLogItemsOfTheirTeamMembers {
+    description: "Allow teamleaders write access to logItems of their team members"
+    participant(p): "org.ifb.trustfabric.Consultant"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    transaction(tx): "org.ifb.trustfabric.AddLogItemToConsultant"
+    condition: (r.teamleaders && r.teamleaders.toString().indexOf(p.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule TeamleadersHaveWriteAccessToLogItemsOfTheirTeamMembers2 {
+    description: "Allow teamleaders write access to logItems of their team members"
+    participant: "org.ifb.trustfabric.Consultant"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AddLogItemToConsultant"
+    action: ALLOW
+}
+
+
+
+rule ClientsHaveReadAccessToTheirOwnData {
+    description: "Allow clients read access to their own data"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.Client"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ClientsCanDeleteTheirAccount {
+    description: "Allow clients to delete their account"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: DELETE
+    resource(r): "org.ifb.trustfabric.Client"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToTheirOwnMasterData {
+    description: "Allow clients write access to their own master data"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.Client"
+    transaction(tx): "org.ifb.trustfabric.UpdateMasterDataOfClient"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToTheirOwnMasterData2 {
+    description: "Allow clients write access to their own master data"
+    participant: "org.ifb.trustfabric.Client"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.UpdateMasterDataOfClient"
+    action: ALLOW
+}
+
+rule ClientsHaveReadAccessToSkills {
+    description: "Allow clients read access to skills"
+    participant: "org.ifb.trustfabric.Client"
+    operation: READ
+    resource: "org.ifb.trustfabric.Skill"
+    action: ALLOW
+}
+
+rule ClientsHaveReadAccessToClientCompanies {
+    description: "Allow clients read access to client companies"
+    participant: "org.ifb.trustfabric.Client"
+    operation: READ
+    resource: "org.ifb.trustfabric.ClientCompany"
+    action: ALLOW
+}
+
+rule ClientsCanCreateAndReadProjects {
+    description: "Allow clients to create and read projects"
+    participant: "org.ifb.trustfabric.Client"
+    operation: CREATE, READ
+    resource: "org.ifb.trustfabric.Project"
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToProjectsTheyCreated {
+    description: "Allow clients write access to projects they created"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: UPDATE, DELETE
+    resource(r): "org.ifb.trustfabric.Project"
+    condition: (p.getIdentifier() == r.creator.getIdentifier())
+    action: ALLOW
+}
+
+rule ClientsHaveReadAccessToProjectsInTheirProposedProjectsList {
+    description: "Allow clients read access to projects in their 'proposedProjects' list"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.ProposedProject"
+    condition: (p.proposedProjects && p.proposedProjects.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToProjectsInTheirProposedProjectsList {
+    description: "Allow clients write access to projects in their 'proposedProjects' list"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.ProposedProject"
+    condition: (p.proposedProjects && p.proposedProjects.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ClientsHaveReadAccessToProjectsInTheirAcceptedProjectsList {
+    description: "Allow clients read access to projects in their 'acceptedProjects' list"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.AcceptedProject"
+    condition: (p.acceptedProjects && p.acceptedProjects.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToProjectsInTheirAcceptedProjectsList {
+    description: "Allow clients write access to projects in their 'acceptedProjects' list"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.AcceptedProject"
+    condition: (p.acceptedProjects && p.acceptedProjects.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ClientsHaveReadAccessToDataOnConsultantsInTheirReadableConsultantsList {
+    description: "Allow clients read access to data on consultants in their 'readableConsultants' list"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.Consultant"
+    condition: (p.readableConsultants && p.readableConsultants.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ClientsHaveReadAccessToDataOnConsultantsInTheirWritableConsultantsList {
+    description: "Allow clients read access to data on consultants in their 'writableConsultants' list"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.Consultant"
+    condition: (p.writableConsultants && p.writableConsultants.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToSkillsOfConsultantsInTheirWritableConsultantsList {
+    description: "Allow clients write access to skills of consultants in their 'writableConsultants' list"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    transaction(tx): "org.ifb.trustfabric.UpdateSkillsOfConsultant"
+    condition: (p.writableConsultants && p.writableConsultants.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToSkillsOfConsultantsInTheirWritableConsultantsList2 {
+    description: "Allow clients write access to skills of consultants in their 'writableConsultants' list"
+    participant: "org.ifb.trustfabric.Client"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.UpdateSkillsOfConsultant"
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToProjectsOfConsultantsInTheirWritableConsultantsList {
+    description: "Allow clients write access to projects of consultants in their 'writableConsultants' list"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    transaction(tx): "org.ifb.trustfabric.UpdateProjectsOfConsultant"
+    condition: (p.writableConsultants && p.writableConsultants.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToProjectsOfConsultantsInTheirWritableConsultantsList2 {
+    description: "Allow clients write access to projects of consultants in their 'writableConsultants' list"
+    participant: "org.ifb.trustfabric.Client"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.UpdateProjectsOfConsultant"
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToLogItemsOfConsultantsInTheirWritableConsultantsList {
+    description: "Allow clients write access to logItems of consultants in their 'writableConsultants' list"
+    participant(p): "org.ifb.trustfabric.Client"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    transaction(tx): "org.ifb.trustfabric.AddLogItemToConsultant"
+    condition: (p.writableConsultants && p.writableConsultants.toString().indexOf(r.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule ClientsHaveWriteAccessToLogItemsOfConsultantsInTheirWritableConsultantsList2 {
+    description: "Allow clients write access to logItems of consultants in their 'writableConsultants' list"
+    participant: "org.ifb.trustfabric.Client"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.AddLogItemToConsultant"
+    action: ALLOW
+}
+
+
+
+rule ClientAdministratorsHaveReadAccessToTheirOwnData {
+    description: "Allow ClientAdministrators read access to their own data"
+    participant(p): "org.ifb.trustfabric.ClientAdministrator"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.ClientAdministrator"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ClientAdministratorsHaveWriteAccessToTheirOwnMasterData {
+    description: "Allow ClientAdministrators write access to their own master data"
+    participant(p): "org.ifb.trustfabric.ClientAdministrator"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.ClientAdministrator"
+    transaction(tx): "org.ifb.trustfabric.UpdateMasterDataOfClientAdministrator"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ClientAdministratorsHaveWriteAccessToTheirOwnMasterData2 {
+    description: "Allow ClientAdministrators write access to their own master data"
+    participant: "org.ifb.trustfabric.ClientAdministrator"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.UpdateMasterDataOfClientAdministrator"
+    action: ALLOW
+}
+
+rule ClientAdministratorsCanDeleteTheirOwnAccounts {
+    description: "Allow ClientAdministrators to delete their own account"
+    participant(p): "org.ifb.trustfabric.ClientAdministrator"
+    operation: DELETE
+    resource(r): "org.ifb.trustfabric.ClientAdministrator"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ClientAdministratorsCanCreateClients {
+    description: "Allow ClientAdministrators to create clients"
+    participant: "org.ifb.trustfabric.ClientAdministrator"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.Client"
+    action: ALLOW
+}
+
+rule ClientAdministratorsCanReadAndDeleteClientsBelongingToTheirOwnCompany {
+    description: "Allow ClientAdministrators to read and delete clients belonging to their on company."
+    participant(p): "org.ifb.trustfabric.ClientAdministrator"
+    operation: READ, DELETE
+    resource(r): "org.ifb.trustfabric.Client"
+    condition: (p.company == r.company)
+    action: ALLOW
+}
+
+rule ClientAdministratorsHaveReadAndWriteAccessToSkills {
+    description: "Allow ClientAdministrators read and write access to skills"
+    participant: "org.ifb.trustfabric.ClientAdministrator"
+    operation: ALL
+    resource: "org.ifb.trustfabric.Skill"
+    action: ALLOW
+}
+
+rule ClientAdministratorsHaveReadAndWriteAccessToClientCompanies {
+    description: "Allow ClientAdministrators read and write access to client companies"
+    participant: "org.ifb.trustfabric.ClientAdministrator"
+    operation: ALL
+    resource: "org.ifb.trustfabric.ClientCompany"
+    action: ALLOW
+}
+
+rule ClientAdministratorsHaveReadAndWriteAccessToConsultantCompanies {
+    description: "Allow ClientAdministrators read and write access to consultant companies"
+    participant: "org.ifb.trustfabric.ClientAdministrator"
+    operation: ALL
+    resource: "org.ifb.trustfabric.ConsultantCompany"
+    action: ALLOW
+}
+
+
+
+rule ConsultantAdministratorsHaveReadAccessToTheirOwnData {
+    description: "Allow ConsultantAdministrators read access to their own data"
+    participant(p): "org.ifb.trustfabric.ConsultantAdministrator"
+    operation: READ
+    resource(r): "org.ifb.trustfabric.ConsultantAdministrator"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantAdministratorsHaveWriteAccessToTheirOwnMasterData {
+    description: "Allow ConsultantAdministrators write access to their own master data"
+    participant(p): "org.ifb.trustfabric.ConsultantAdministrator"
+    operation: UPDATE
+    resource(r): "org.ifb.trustfabric.ConsultantAdministrator"
+    transaction(tx): "org.ifb.trustfabric.UpdateMasterDataOfConsultantAdministrator"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantAdministratorsHaveWriteAccessToTheirOwnMasterData2 {
+    description: "Allow ConsultantAdministrators write access to their own master data"
+    participant: "org.ifb.trustfabric.ConsultantAdministrator"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.UpdateMasterDataOfConsultantAdministrator"
+    action: ALLOW
+}
+
+rule ConsultantAdministratorsCanDeleteTheirOwnAccounts {
+    description: "Allow ConsultantAdministrators to delete their own account"
+    participant(p): "org.ifb.trustfabric.ConsultantAdministrator"
+    operation: DELETE
+    resource(r): "org.ifb.trustfabric.ConsultantAdministrator"
+    condition: (p.getIdentifier() == r.getIdentifier())
+    action: ALLOW
+}
+
+rule ConsultantAdministratorsCanCreateConsultants {
+    description: "Allow ConsultantAdministrators to create consultants"
+    participant: "org.ifb.trustfabric.ConsultantAdministrator"
+    operation: CREATE
+    resource: "org.ifb.trustfabric.Consultant"
+    action: ALLOW
+}
+
+rule ConsultantAdministratorsCanReadAndDeleteConsultantsBelongingToTheirOwnCompany {
+    description: "Allow ConsultantAdministrators to read and delete consultants belonging to their own company"
+    participant(p): "org.ifb.trustfabric.ConsultantAdministrator"
+    operation: READ, DELETE
+    resource(r): "org.ifb.trustfabric.Consultant"
+    condition: (p.company == r.company)
+    action: ALLOW
+}
+
+rule ConsultantAdministratorsHaveReadAndWriteAccessToSkills {
+    description: "Allow ConsultantAdministrators read and write access to skills"
+    participant: "org.ifb.trustfabric.ConsultantAdministrator"
+    operation: ALL
+    resource: "org.ifb.trustfabric.Skill"
+    action: ALLOW
+}
+
+rule ConsultantAdministratorsHaveReadAndWriteAccessToClientCompanies {
+    description: "Allow ConsultantAdministrators read and write access to client companies"
+    participant: "org.ifb.trustfabric.ConsultantAdministrator"
+    operation: ALL
+    resource: "org.ifb.trustfabric.ClientCompany"
+    action: ALLOW
+}
+
+rule ConsultantAdministratorsHaveReadAndWriteAccessToConsultantCompanies {
+    description: "Allow ConsultantAdministrators read and write access to consultant companies"
+    participant: "org.ifb.trustfabric.ConsultantAdministrator"
+    operation: ALL
+    resource: "org.ifb.trustfabric.ConsultantCompany"
+    action: ALLOW
+}
+
+
+
+rule NetworkAdministratorsCanCreateReadAndDeleteClientAdministrators {
+    description: "Allow Network Administrators to create, read and delete ClientAdministrators"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: CREATE, READ, DELETE
+    resource: "org.ifb.trustfabric.ClientAdministrator"
+    action: ALLOW
+}
+
+rule NetworkAdministratorsCanCreateReadAndDeleteConsultantAdministrators {
+    description: "Allow Network Administrators to create, read and delete ConsultantAdministrators"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: CREATE, READ, DELETE
+    resource: "org.ifb.trustfabric.ConsultantAdministrator"
+    action: ALLOW
+}
+
+rule NetworkAdministratorsHaveReadAndWriteAccessToSkills {
+    description: "Allow Network Administrators read and write access to skills"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.ifb.trustfabric.Skill"
+    action: ALLOW
+}
+
+rule NetworkAdministratorsHaveReadAndWriteAccessToClientCompanies {
+    description: "Allow Network Administrators read and write access to client companies"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.ifb.trustfabric.ClientCompany"
+    action: ALLOW
+}
+
+rule NetworkAdministratorsHaveReadAndWriteAccessToConsultantCompanies {
+    description: "Allow Network Administrators read and write access to consultant companies"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.ifb.trustfabric.ConsultantCompany"
+    action: ALLOW
+}
+
+
+
+
+// System Access Control Rules:
+
+
+rule NetworkAdministratorsCanUpdateAndDeleteTheNetwork {
+    description: "Grant network administrators the right to update and delete the network"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: UPDATE, DELETE
+    resource: "org.hyperledger.composer.system.Network"
+    action: ALLOW
+}
+
+rule NetworkAdministratorsCanIssueIdentity {
+    description: "Grant network administrators the right to issue an identity"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.IssueIdentity"
+    action: ALLOW
+}
+
+rule ClientAdministratorsCanIssueIdentity {
+    description: "Grant ClientAdministrators the right to issue an identity"
+    participant: "org.ifb.trustfabric.ClientAdministrator"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.IssueIdentity"
+    action: ALLOW
+}
+
+rule ConsultantAdministratorsCanIssueIdentity {
+    description: "Grant ConsultantAdministrators the right to issue an identity"
+    participant: "org.ifb.trustfabric.ConsultantAdministrator"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.IssueIdentity"
+    action: ALLOW
+}
+
+
+
+rule AllParticipantsCanCreateHistorianRecords {
+  description: "Allow all participants to create HistorianRecords"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: CREATE
+  resource: "org.hyperledger.composer.system.HistorianRecord"
+  action: ALLOW
+}
+
+rule NoParticipantCanReadUpdateOrDeleteHistorianRecords {
+  description: "No participant is allowed to read, update or delete HistorianRecords"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: READ, UPDATE, DELETE
+  resource: "org.hyperledger.composer.system.HistorianRecord"
+  action: DENY
+}
+
+rule AllParticipantsCanUseAddAssetTransactions {
+  description: "Allow all participants to use AddAssetTransactions"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.AddAsset"
+  action: ALLOW
+}
+
+rule AllParticipantsCanUseUpdateAssetTransactions {
+  description: "Allow all participants to use UpdateAssetTransactions"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.UpdateAsset"
+  action: ALLOW
+}
+
+rule AllParticipantsCanUseRemoveAssetTransactions {
+  description: "Allow all participants to use RemoveAssetTransactions"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.RemoveAsset"
+  action: ALLOW
+}
+
+rule AllParticipantsCanUseAddParticipantTransactions {
+  description: "Allow all participants to use AddParticipantTransactions"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.AddParticipant"
+  action: ALLOW
+}
+
+rule AllParticipantsCanUseUpdateParticipantTransactions {
+  description: "Allow all participants to use UpdateParticipantTransactions"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.UpdateParticipant"
+  action: ALLOW
+}
+
+rule AllParticipantsCanUseRemoveParticipantTransactions {
+  description: "Allow all participants to use RemoveParticipantTransactions"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.RemoveParticipant"
+  action: ALLOW
+}
+
+rule AllParticipantsCanUseAssetTransactions {
+  description: "Allow all participants to use AssetTransactions"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.AssetTransaction"
+  action: ALLOW
+}
+
+rule AllParticipantsCanUseParticipantTransactions {
+  description: "Allow all participants to use ParticipantTransactions"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.ParticipantTransaction"
+  action: ALLOW
+}
+
+rule AllParticipantsCanUseRegistryTransactions {
+  description: "Allow all participants to use RegistryTransactions"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.RegistryTransaction"
+  action: ALLOW
+}
+
+rule AllParticipantsCanAccessTransactions {
+  description: "Allow all participants to access transactions"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.Transaction"
+  action: ALLOW
+}
+
+rule AllParticipantsCanAccessAssetRegistries {
+  description: "Allow all participants to access asset registries"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.AssetRegistry"
+  action: ALLOW
+}
+
+rule AllParticipantsCanAccessParticipantRegistries {
+  description: "Allow all participants to access participant registries"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.ParticipantRegistry"
+  action: ALLOW
+}
+
+rule AllParticipantsCanAccessTransactionRegistries {
+  description: "Allow all participants to access transaction registries"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.TransactionRegistry"
+  action: ALLOW
+}
+
+rule AllParticipantsCanAccessRegistries {
+  description: "Allow all participants to access registries"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.Registry"
+  action: ALLOW
+}
+
+rule AllParticipantsCanAccessEvents {
+  description: "Allow all participants to access events"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.Event"
+  action: ALLOW
+}
+
+rule AllParticipantsCanAccessIdentities {
+  description: "Allow all participants to access identities"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.Identity"
+  action: ALLOW
+}
+
+rule AllParticipantsCanActivateCurrentIdentity {
+  description: "Allow all participants to activate the current identity"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.ActivateCurrentIdentity"
+  action: ALLOW
+}
+
+rule AllParticipantsCanAccessTheNetwork {
+  description: "Allow all participants to access the network"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: READ
+  resource: "org.hyperledger.composer.system.Network"
+  action: ALLOW
+}

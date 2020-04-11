@@ -1,0 +1,25 @@
+.gap {
+    height: 5px;
+}
+
+.fields {
+    margin-left: 20px;
+    margin-right: 20px;    
+}
+
+.cancelButton {
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+}
+
+.submitButton {
+    margin-left: 10px;
+    margin-right: 10px;
+    float: right;
+}
+
+.spinner {
+    margin: 0 auto;
+    z-index: 999;
+}

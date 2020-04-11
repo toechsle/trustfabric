@@ -1,0 +1,20 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+  <h1 mat-dialog-title >{{ data.title }}</h1>
+  <mat-dialog-content>
+    <p class="text">{{ data.text }}</p>
+    <mat-selection-list #clients [(ngModel)]="selectedClients" (ngModelChange)="onNgModelChange()">
+      <mat-list-option *ngFor="let client of arrayOfRemovableClients" [value]="client.id">
+        {{client.firstName}}  {{client.lastName}}   ({{client.email}}) 
+      </mat-list-option>
+    </mat-selection-list>
+      <div class="gap"></div>
+      <p>
+        Clients selected: {{clients.selectedOptions.selected.length}}
+      </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button *ngIf="!isLoading" class="cancelButton" mat-raised-button color="primary" [mat-dialog-close]>Cancel</button>
+    <button *ngIf="!isLoading" class="submitButton" mat-raised-button color="primary" [disabled]="isDisabled" (click)="onRemoveClicked()">Remove</button> 
+    <mat-spinner [diameter]="40" *ngIf="isLoading" class="spinner"></mat-spinner> 
+  </mat-dialog-actions>
+</section>

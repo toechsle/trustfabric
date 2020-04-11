@@ -1,0 +1,74 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f, data.id)" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px" class="fields">  
+    <h1 mat-dialog-title>Update your personal data</h1>
+    <mat-dialog-content fxLayout="column" fxLayoutAlign="center">
+        <mat-form-field>
+          <input 
+            matInput 
+            [(ngModel)]="data.firstName" 
+            #firstNameInput="ngModel" 
+            name="firstName" 
+            type="text" 
+            required>
+            <mat-hint>First Name</mat-hint>      
+          <mat-error *ngIf="firstNameInput.hasError('required')">
+            First name is required.
+          </mat-error>           
+        </mat-form-field>
+        <mat-form-field>
+          <input 
+            matInput 
+            [(ngModel)]="data.lastName" 
+            #lastNameInput="ngModel" 
+            name="lastName" 
+            type="text" 
+            required>
+          <mat-hint>Last Name</mat-hint>   
+          <mat-error *ngIf="lastNameInput.hasError('required')">
+            Last name is required.
+          </mat-error>   
+        </mat-form-field>
+        <mat-form-field>
+          <input 
+            matInput 
+            [(ngModel)]="data.email" 
+            #emailInput="ngModel" 
+            name="email" 
+            type="email"
+            email
+            required>
+          <mat-hint>Email</mat-hint>    
+          <mat-error *ngIf="emailInput.hasError('required')">
+            Email address is required.
+          </mat-error>   
+          <mat-error *ngIf="!emailInput.hasError('required')">
+            Email address is invalid.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select [(ngModel)]="data.company" name="company">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let company of companies" [value]="company.name">
+              {{ company.name }}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Company</mat-hint>    
+        </mat-form-field> 
+        <mat-form-field>
+          <input 
+            matInput 
+            [(ngModel)]="data.position" 
+            #positionInput="ngModel" 
+            name="position" 
+            type="text">
+          <mat-hint>Position</mat-hint>   
+        </mat-form-field>
+    </mat-dialog-content>
+    <div class="gap"></div>
+    <mat-dialog-actions>
+        <button *ngIf="!isLoading" mat-raised-button color="primary" [mat-dialog-close] class="cancelButton">Cancel</button>   
+        <button *ngIf="!isLoading" type="submit" mat-raised-button color="primary" [disabled]="f.invalid" class="submitButton">Submit</button> 
+        <mat-spinner [diameter]="40" *ngIf="isLoading" class="spinner"></mat-spinner>  
+    </mat-dialog-actions>
+  </form>
+</section>

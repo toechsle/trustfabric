@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start">
+    <section class="personal-data">
+    <mat-list>
+        <mat-list-item>                    
+            <h3 class="name" matTooltip="Update your personal data" matTooltipPosition="right" (click)="openUpdateDialog()"> {{firstName}} {{lastName}} </h3>                                       
+        </mat-list-item> 
+        <mat-divider></mat-divider>  
+        <mat-list-item *ngIf="position && company"> {{position}} at {{company}} </mat-list-item>
+        <mat-list-item *ngIf="position && !company"> {{position}} </mat-list-item>
+        <mat-list-item *ngIf="!position && company"> {{company}} </mat-list-item>
+        <div class="gap"></div>    
+        <mat-list-item>
+            <mat-icon>email</mat-icon>
+            <span class="email"> {{email}} </span>
+        </mat-list-item>
+    </mat-list>
+    </section>   
+    <section class="white-space"></section>
+</div>

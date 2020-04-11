@@ -1,0 +1,16 @@
+.home {
+    text-align: center;
+}
+
+.signin {
+    text-align: center;
+}
+
+.gap {
+    height: 60px;
+}
+
+.spinner {
+    margin: 0 auto;
+    z-index: 999;
+}

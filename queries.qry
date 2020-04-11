@@ -1,0 +1,62 @@
+query selectConsultantsByEmail {
+    description: "Select the consultant with a specific email address"
+    statement:
+        SELECT org.ifb.trustfabric.Consultant
+            WHERE (email == _$email)
+}
+
+query selectConsultantsByCompany {
+    description: "Select all consultants from a specific company"
+    statement:
+        SELECT org.ifb.trustfabric.Consultant
+            WHERE (company == _$company)
+                ORDER BY [lastName, firstName]
+}
+
+query selectConsultants {
+    description: "Select all consultants"
+    statement:
+        SELECT org.ifb.trustfabric.Consultant
+            ORDER BY [company, lastName, firstName]
+}
+
+query selectClientsByProposedProjectAccess {
+    description: "Select all clients with access to the specified proposed project"
+    statement:
+        SELECT org.ifb.trustfabric.Client
+            WHERE (proposedProjects CONTAINS [_$proposedProject])
+                ORDER BY [company, lastName, firstName]
+}
+
+query selectClientsByAcceptedProjectAccess {
+    description: "Select all clients with access to the specified accepted project"
+    statement:
+        SELECT org.ifb.trustfabric.Client
+            WHERE (acceptedProjects CONTAINS [_$acceptedProject])
+                ORDER BY [company, lastName, firstName]
+}
+
+query selectClients {
+    description: "Select all clients"
+    statement:
+        SELECT org.ifb.trustfabric.Client
+            ORDER BY [company, lastName, firstName]
+}
+
+query selectProposedProjects {
+    description: "Select all proposed projects"
+    statement:
+        SELECT org.ifb.trustfabric.ProposedProject
+            ORDER BY [name]
+}
+
+query selectAcceptedProjects {
+    description: "Select all accepted projects"
+    statement:
+        SELECT org.ifb.trustfabric.AcceptedProject
+            ORDER BY [name]
+}
+
+
+
+

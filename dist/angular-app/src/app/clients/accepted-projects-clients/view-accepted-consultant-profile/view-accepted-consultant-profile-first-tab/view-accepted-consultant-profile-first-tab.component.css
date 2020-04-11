@@ -1,0 +1,86 @@
+.container {
+    position: relative;
+}
+
+.closeButton {
+    position: absolute;
+    right: 10px;
+    top: 2px;
+}
+
+.gapTop {
+    height: 50px;
+}
+
+.consultant-data {
+    padding: 20px; 
+}
+
+.lists {
+    padding-top: 80px;
+}
+
+.asset-data {
+    width: 100%;
+}
+
+.skills {
+    width: 100%;
+}
+
+.projects {
+    width: 100%;
+}
+
+.email {
+    padding-left: 10px;
+}
+
+.gap {
+    height: 10px;
+}
+
+table {
+    width: 100%;
+}
+  
+.table1 > td, th {
+    width: 80%;
+}
+
+.table2 > td, th {
+    width: 20%;
+}
+
+.card {
+    width: 300px;
+}
+
+.add-skills {
+    padding-top: 10px;
+}
+
+.add-projects {
+    padding-top: 10px;
+}
+
+.text {
+    padding-left: 5px;
+}
+
+.no-wrap {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mat-cell {
+    padding: 12px 16px 12px 0;
+}
+
+.mat-header-cell {
+    font-size: 1.0em;
+    font-weight: bold;
+    color: white;
+    background: rgb(160, 182, 211);
+}

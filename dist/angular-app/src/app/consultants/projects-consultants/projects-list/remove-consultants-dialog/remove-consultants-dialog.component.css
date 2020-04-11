@@ -1,0 +1,24 @@
+.text {
+    text-align: center;
+}
+
+.cancelButton {
+    margin-left: 10px;
+    margin-right: 50px;
+    float: left;
+}
+
+.submitButton {
+    margin-left: 50px;
+    margin-right: 10px;
+    float: right;
+}
+
+.gap {
+    height: 10px;
+}
+
+.spinner {
+    margin: 0 auto;
+    z-index: 999;
+}

@@ -1,0 +1,22 @@
+<mat-nav-list>
+  <a *ngIf="isAuthenticated && authService.hasRole('Client')" mat-list-item routerLink="/clients" (click)="onClose()">
+    <mat-icon>people</mat-icon>
+    <span class="nav-caption">Client User</span>
+  </a>
+  <a *ngIf="isAuthenticated && authService.hasRole('Consultant')" mat-list-item routerLink="/consultants" (click)="onClose()">
+    <mat-icon>people</mat-icon>
+    <span class="nav-caption">Consultant User</span>
+  </a>
+  <a *ngIf="isAuthenticated && authService.hasRole('ClientAdmin')" mat-list-item routerLink="/admin-clients" (click)="onClose()">
+    <mat-icon>people_outline</mat-icon>
+    <span class="nav-caption">Client Administrator</span>
+  </a>
+  <a *ngIf="isAuthenticated && authService.hasRole('ConsultantAdmin')" mat-list-item routerLink="/admin-consultants" (click)="onClose()">
+    <mat-icon>people_outline</mat-icon>
+    <span class="nav-caption">Consultant Administrator</span>
+  </a>
+  <a *ngIf="isAuthenticated && authService.hasRole('NetworkAdmin')" mat-list-item routerLink="/network-admin" (click)="onClose()">
+    <mat-icon>people_outline</mat-icon>
+    <span class="nav-caption">Network Administrator</span>
+  </a>
+</mat-nav-list>

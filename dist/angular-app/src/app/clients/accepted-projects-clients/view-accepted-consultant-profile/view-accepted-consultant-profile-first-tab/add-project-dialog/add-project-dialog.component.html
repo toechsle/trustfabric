@@ -1,0 +1,59 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+  <h1 mat-dialog-title >{{ data.title }}</h1>
+  <div class="gap1"></div>
+  <mat-dialog-content>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" fxLayout="column" fxLayoutAlign="center"> 
+      <mat-form-field>
+          <input 
+            matInput 
+            ngModel 
+            #nameInput="ngModel" 
+            name="name" 
+            type="text" 
+            placeholder="Project Name" 
+            required>
+          <mat-error *ngIf="nameInput.hasError('required')">
+            Project name is required.
+          </mat-error>   
+      </mat-form-field>
+      <mat-form-field>
+        <input 
+          matInput 
+          ngModel 
+          #roleInput="ngModel" 
+          name="role" 
+          type="text" 
+          placeholder="Role of consultant in project" 
+          required>
+        <mat-error *ngIf="roleInput.hasError('required')">
+          Role is required.
+        </mat-error>   
+    </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Select Start Date" ngModel #beginningInput="ngModel" name="beginning" type="date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="beginningInput.hasError('required')">
+            Start date is required.
+        </mat-error>   
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="Select End Date" ngModel #endInput="ngModel" name="end" type="date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="endInput.hasError('required')">
+            End date is required.
+        </mat-error>   
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Textarea" ngModel #textInput="ngModel" name="description" rows="5"></textarea>
+      </mat-form-field>
+      <div class="gap2"></div>
+      <div class="buttons">
+        <button *ngIf="!isLoading" class="cancelButton" mat-raised-button color="primary" [mat-dialog-close]>Cancel</button>
+        <button *ngIf="!isLoading" class="submitButton" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button> 
+        <mat-spinner [diameter]="40" *ngIf="isLoading" class="spinner"></mat-spinner> 
+      </div>  
+    </form>
+  </mat-dialog-content>
+</section>

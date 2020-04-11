@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a routerLink="/">trustfabric</a>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+      <li *ngIf="isAuthenticated && authService.hasRole('Client')">
+        <a routerLink="/clients">Client User</a>
+      </li>
+      <li *ngIf="isAuthenticated && authService.hasRole('Consultant')">
+        <a routerLink="/consultants">Consultant User</a>
+      </li>
+      <li *ngIf="isAuthenticated && authService.hasRole('ClientAdmin')">
+        <a routerLink="/admin-clients">Client Administrator</a>
+      </li>
+      <li *ngIf="isAuthenticated && authService.hasRole('ConsultantAdmin')">
+        <a routerLink="/admin-consultants">Consultant Administrator</a>
+      </li>
+      <li *ngIf="isAuthenticated && authService.hasRole('NetworkAdmin')">
+        <a routerLink="/network-admin">Network Administrator</a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>

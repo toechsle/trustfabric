@@ -1,0 +1,26 @@
+.gap {
+    height: 40px;
+}
+
+.skills {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+}
+
+.client-companies {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+}
+
+.consultant-companies {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+}
+
+.spinner {
+    margin: 0 auto;
+    z-index: 999;
+}

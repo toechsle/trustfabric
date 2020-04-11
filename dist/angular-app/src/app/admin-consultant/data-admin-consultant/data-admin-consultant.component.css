@@ -1,0 +1,20 @@
+.personal-data {
+    padding: 20px; 
+}
+
+.email {
+    padding-left: 10px;
+}
+
+.gap {
+    height: 10px;
+}
+
+.name {
+    cursor: pointer;
+}
+
+.spinner {
+    margin: 0 auto;
+    z-index: 999;
+}

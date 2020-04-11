@@ -1,0 +1,51 @@
+
+<div class="gap"></div>
+<div class="home" fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxLayoutGap.gt-md="80px">
+	<section>
+	  <h1>CLIENTS</h1>
+	  <p>Find the best consultants for your project.</p>
+	</section>
+	<section>
+	  <h1>CONSULTANTS</h1>
+	  <p>Verify your skills and experience.</p>
+	</section>
+	<section>
+	  <h1>SUCCESS</h1>
+	  <p>Better results through better information.<p>
+	</section>
+</div>
+<div class="gap"></div>
+<div class="signin" *ngIf="!isAuthenticated">
+	<a (click)="onLinkClicked()" *ngIf="!isLoading" href="http://localhost:3000/auth/github">Sign in with GitHub</a>
+</div>
+<div class="init-account" *ngIf="isAuthenticated && isNewUser">
+	
+	<section class="new-user" fxLayout fxLayoutAlign="center">
+		<form #f="ngForm" (ngSubmit)="onSubmit(f)"> 
+			<mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex="400px" fxFlex.xs="100%">
+					<mat-card-title fxLayoutAlign="center">Please provide your set-up token</mat-card-title>
+					<mat-card-content fxLayout="column" fxLayoutAlign="center">
+									<mat-form-field>
+											<input 
+												matInput 
+												ngModel 
+												#tokenInput="ngModel" 
+												name="initToken" 
+												type="text" 
+												placeholder="Set-up token" 
+												required>
+											<mat-error *ngIf="tokenInput.hasError('required')">
+												Set-up token is required.
+											</mat-error>   
+									</mat-form-field>  
+					</mat-card-content>
+					<mat-card-actions>
+							<button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>    
+					</mat-card-actions>
+			</mat-card>  
+		</form>
+	</section>
+	
+</div>
+
+<mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>

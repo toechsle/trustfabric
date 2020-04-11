@@ -1,0 +1,41 @@
+.container {
+    width: 98%;
+    padding-top: 50px;  
+}
+
+table {
+    width: 100%;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+}
+  
+td, th {
+    width: 32%;
+}
+
+.gap {
+    height: 10px;
+}
+
+.mat-cell {
+    padding: 12px 16px 12px 0;
+}
+
+.mat-header-cell {
+    font-size: 1.0em;
+    font-weight: bold;
+    color: white;
+    background: rgb(160, 182, 211);
+}
+
+.filter {
+    font-size: 1.0em;
+}
+
+.project-heading {
+    font-size: 1.0em;
+    font-weight: bold;
+    color: rgb(160, 182, 211);
+}

@@ -1,0 +1,259 @@
+namespace org.ifb.trustfabric
+
+
+
+
+abstract participant User identified by id {
+  o String id
+  o String firstName
+  o String lastName
+  o String email
+}
+
+participant ClientAdministrator extends User {
+  o String company
+}
+
+participant ConsultantAdministrator extends User {
+  o String company
+}
+
+participant Client extends User {
+  o String company optional
+  o String position optional
+  --> Consultant[] readableConsultants optional
+  --> Consultant[] writableConsultants optional
+  --> ProposedProject[] proposedProjects optional
+  --> AcceptedProject[] acceptedProjects optional
+}
+
+participant Consultant extends User {
+  o String company optional
+  o String position optional
+  o String image optional
+  o LogItem[] logItems optional
+  --> Consultant[] teamleaders optional
+  --> Skill[] skills optional
+  --> Project[] projects optional
+}
+
+concept LogItem {
+  --> User creator
+  o DateTime date
+  o String text
+}
+
+
+
+asset Skill identified by id {
+  o String id
+  o String name
+  o Proficiency proficiency
+}
+
+enum Proficiency {
+  o Beginner
+  o Intermediate
+  o Advanced
+}
+
+asset Project identified by id {
+  o String id
+  o String name
+  o String role
+  o DateTime beginning
+  o DateTime end
+  o String duration
+  o String description optional
+  --> Client creator
+}
+
+abstract asset XProject identified by id {
+  o String id
+  o String name
+  --> Consultant projectLeader
+  --> Consultant[] consultants optional
+}
+
+asset ProposedProject extends XProject {
+  
+}
+
+asset AcceptedProject extends XProject {
+  
+}
+
+asset ConsultantCompany identified by name {
+  o String name
+}
+
+asset ClientCompany identified by name {
+  o String name
+}
+
+
+
+
+transaction UpdateMasterDataOfClientAdministrator {
+  --> ClientAdministrator administrator
+  o String newFirstName optional
+  o String newLastName optional
+  o String newEmail optional
+}
+
+event ClientAdministratorUpdated {
+  o ClientAdministrator administratorOld
+  o ClientAdministrator administratorNew
+}
+
+
+
+transaction UpdateMasterDataOfConsultantAdministrator {
+  --> ConsultantAdministrator administrator
+  o String newFirstName optional
+  o String newLastName optional
+  o String newEmail optional
+}
+
+event ConsultantAdministratorUpdated {
+  o ConsultantAdministrator administratorOld
+  o ConsultantAdministrator administratorNew
+}
+
+
+
+transaction UpdateMasterDataOfClient {
+  --> Client client
+  o String newFirstName optional
+  o String newLastName optional
+  o String newEmail optional
+  o String newCompany optional
+  o String newPosition optional
+}
+
+transaction AddToReadableConsultantsOfClient {
+  --> Client client
+  --> Consultant[] newReadableConsultants
+}
+
+transaction RemoveFromReadableConsultantsOfClient {
+  --> Client client
+  --> Consultant[] readableConsultantsToBeRemoved
+}
+
+transaction AddToWritableConsultantsOfClient {
+  --> Client client
+  --> Consultant[] newWritableConsultants
+}
+
+transaction RemoveFromWritableConsultantsOfClient {
+  --> Client client
+  --> Consultant[] writableConsultantsToBeRemoved
+}
+
+transaction AddToProposedProjectsOfClient {
+  --> Client client
+  --> ProposedProject[] newProposedProjects
+}
+
+transaction RemoveFromProposedProjectsOfClient {
+  --> Client client
+  --> ProposedProject proposedProjectToBeRemoved
+}
+
+transaction AddToAcceptedProjectsOfClient {
+  --> Client client
+  --> AcceptedProject[] newAcceptedProjects
+}
+
+transaction RemoveFromAcceptedProjectsOfClient {
+  --> Client client
+  --> AcceptedProject acceptedProjectToBeRemoved
+}
+
+event ClientUpdated {
+  o Client clientOld
+  o Client clientNew
+}
+
+
+
+transaction UpdateMasterDataOfConsultant {
+  --> Consultant consultant
+  o String newFirstName optional
+  o String newLastName optional
+  o String newEmail optional
+  o String newCompany optional
+  o String newPosition optional
+}
+
+transaction UpdateImageOfConsultant {
+  --> Consultant consultant
+  o String newImage
+}
+
+transaction AddTeamleaderWithGivenEmailToConsultant {
+  --> Consultant consultant
+  o String email
+}
+
+transaction RemoveTeamleaderFromConsultant {
+  --> Consultant consultant
+  --> Consultant teamleaderToBeRemoved
+}
+
+transaction UpdateSkillsOfConsultant {
+  --> Consultant consultant
+  --> Skill[] newSkills
+}
+
+transaction UpdateProjectsOfConsultant {
+  --> Consultant consultant
+  --> Project[] newProject
+}
+
+transaction AddLogItemToConsultant {
+  --> Consultant consultant
+  o LogItem[] logItem
+}
+
+event ConsultantUpdated {
+  o Consultant consultantOld
+  o Consultant consultantNew
+}
+
+
+
+transaction AddToConsultantsOfProposedProject {
+  --> ProposedProject proposedProject
+  --> Consultant[] newConsultants
+}
+
+transaction RemoveFromConsultantsOfProposedProject {
+  --> ProposedProject proposedProject
+  --> Consultant[] consultantsToBeRemoved
+}
+
+event ProposedProjectUpdated {
+  o ProposedProject proposedProjectOld
+  o ProposedProject proposedProjectNew
+}
+
+
+
+transaction AddToConsultantsOfAcceptedProject {
+  --> AcceptedProject acceptedProject
+  --> Consultant[] newConsultants
+}
+
+transaction RemoveFromConsultantsOfAcceptedProject {
+  --> AcceptedProject acceptedProject
+  --> Consultant[] consultantsToBeRemoved
+}
+
+event AcceptedProjectUpdated {
+  o AcceptedProject acceptedProjectOld
+  o AcceptedProject acceptedProjectNew
+}
+
+

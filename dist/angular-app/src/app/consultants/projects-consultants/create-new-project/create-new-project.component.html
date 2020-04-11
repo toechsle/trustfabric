@@ -1,0 +1,25 @@
+<section class="new-project" fxLayout fxLayoutAlign="center">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)"> 
+    <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex="400px" fxFlex.xs="100%">
+        <mat-card-title fxLayoutAlign="center">Create a new project</mat-card-title>
+        <mat-card-content fxLayout="column" fxLayoutAlign="center">
+                <mat-form-field>
+                    <input 
+                      matInput 
+                      ngModel 
+                      #nameInput="ngModel" 
+                      name="name" 
+                      type="text" 
+                      placeholder="Project Name" 
+                      required>
+                    <mat-error *ngIf="nameInput.hasError('required')">
+                      Project name is required.
+                    </mat-error>   
+                </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>       
+        </mat-card-actions>
+    </mat-card>  
+  </form>
+</section>

@@ -1,0 +1,114 @@
+<section class="container" fxLayout="column" fxLayoutAlign="center center">
+   
+    <mat-dialog-actions class="closeButton">
+     <button mat-raised-button color="primary" [mat-dialog-close]>Close</button>   
+   </mat-dialog-actions>
+   
+   <div class="gapTop"></div>  
+  
+   <mat-dialog-content>
+      <div class="consultant-data" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="space-evenly" fxLayoutGap.gt-sm="50px">
+
+          <div class="personal-data" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start" fxLayoutGap="10px" fxLayoutGap.gt-sm="20px">
+              <section>
+                  <div *ngIf="image=='assets/images/defaultProfilePic.png'" class="card">
+                      <img [src]="image" alt="profile picture" class="card-img-top">
+                  </div>
+                  <div *ngIf="image!=='assets/images/defaultProfilePic.png'" class="card">
+                    <img [src]="image" alt="profile picture" class="card-img-top">
+                  </div>
+                  <div>
+                  </div>
+              </section>
+              <section>
+                  <mat-list>
+                      <mat-list-item>                    
+                          <h3 class="name" class="no-wrap"> {{firstName}} {{lastName}} </h3>                                       
+                      </mat-list-item> 
+                      <mat-divider></mat-divider>  
+                      <mat-list-item class="no-wrap" *ngIf="position && company"> {{position}} at {{company}} </mat-list-item>
+                      <mat-list-item class="no-wrap" *ngIf="position && !company"> {{position}} </mat-list-item>
+                      <mat-list-item class="no-wrap" *ngIf="!position && company"> {{company}} </mat-list-item>
+                      <div class="gap"></div>    
+                      <mat-list-item class="no-wrap">
+                          <mat-icon>email</mat-icon>
+                          <span class="email"> {{email}} </span>
+                      </mat-list-item>
+                  </mat-list>
+              </section>
+          </div>
+        
+          <div class="lists" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="80px">
+              <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                  <strong>Error:</strong> {{errorMessage}}
+              </div>  
+              <div class="asset-data" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="40px">
+                  <section class="skills">      
+                      <div class="mat-elevation-z8">       
+                          <table class="table1" mat-table [dataSource]="dataSource" #skillSort="matSort" matSort>
+                              <ng-container matColumnDef="id">
+                                  <th mat-header-cell *matHeaderCellDef> ID </th>
+                                  <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="name">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Skill </th>
+                                  <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="proficiency">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Proficiency </th>
+                                  <td mat-cell *matCellDef="let row"> {{row.proficiency}} </td>
+                              </ng-container>
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                          </table> 
+                          <mat-paginator #skillPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                      </div>
+                  </section>   
+                  <section class="projects">
+                      <div class="mat-elevation-z8">       
+                          <table class="table2" mat-table [dataSource]="dataSource2" #projectSort="matSort" matSort>
+                              <ng-container matColumnDef="id">
+                                  <th mat-header-cell *matHeaderCellDef> ID </th>
+                                  <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="name">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Project </th>
+                                  <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="role">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+                                <td mat-cell *matCellDef="let row"> {{row.role}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="beginning">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Beginning </th>
+                                  <td mat-cell *matCellDef="let row"> {{row.beginning | date : "mediumDate"}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="end">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header> End </th>
+                                  <td mat-cell *matCellDef="let row"> {{row.end | date : "mediumDate"}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="duration">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration </th>
+                                <td mat-cell *matCellDef="let row"> {{row.duration}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="description">
+                                <th mat-header-cell *matHeaderCellDef> Details </th>
+                                <td mat-cell *matCellDef="let row" class="description"> 
+                                  <button mat-icon-button (click)="openDescription(row.id, row.name, row.role, row.beginning, row.end, row.duration, row.description)">
+                                      <mat-icon aria-label="icon-button with a page-view icon">pageview</mat-icon>
+                                  </button>
+                                </td>
+                              </ng-container>
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                          </table> 
+                          <mat-paginator #projectPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                      </div>
+                  </section>
+              </div>
+          </div>
+                  
+        </div>
+  </mat-dialog-content>
+  
+</section>

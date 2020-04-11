@@ -1,0 +1,66 @@
+<section class="new-client" fxLayout fxLayoutAlign="center">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)"> 
+      <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex="400px" fxFlex.xs="100%">
+          <mat-card-title fxLayoutAlign="center">Create a new client</mat-card-title>
+          <mat-card-content fxLayout="column" fxLayoutAlign="center">
+                  <mat-form-field>
+                      <input 
+                        matInput 
+                        ngModel 
+                        #firstNameInput="ngModel" 
+                        name="firstName" 
+                        type="text" 
+                        placeholder="First Name" 
+                        required>
+                      <mat-error *ngIf="firstNameInput.hasError('required')">
+                        First name is required.
+                      </mat-error>   
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input 
+                        matInput 
+                        ngModel 
+                        #lastNameInput="ngModel" 
+                        name="lastName" 
+                        type="text" 
+                        placeholder="Last Name" 
+                        required>
+                      <mat-error *ngIf="lastNameInput.hasError('required')">
+                        Last name is required.
+                      </mat-error>   
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input 
+                      matInput 
+                      ngModel 
+                      #emailInput="ngModel" 
+                      name="email" 
+                      type="email" 
+                      placeholder="Email Address" 
+                      email
+                      required>
+                    <mat-error *ngIf="emailInput.hasError('required')">
+                      Email address is required.
+                    </mat-error>   
+                    <mat-error *ngIf="!emailInput.hasError('required')">
+                      Email address is invalid.
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <mat-select placeholder="Company" ngModel #companyInput="ngModel" name="company" required>
+                        <mat-option *ngFor="let company of companies" [value]="company.name">
+                          {{ company.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="companyInput.hasError('required')">
+                        Company is required.
+                      </mat-error>   
+                  </mat-form-field>    
+          </mat-card-content>
+          <mat-card-actions>
+              <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>          
+          </mat-card-actions>
+      </mat-card>  
+    </form>
+</section>
+  
