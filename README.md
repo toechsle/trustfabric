@@ -72,6 +72,6 @@ Using Blockchain Technology to Create a System for Verifying Experience and Know
 
 
 ******************************************************************************************************************************************************
-For a video presentation of the application see files "trustfabric_video_1.mov, trustfabric_video_2.mov, trustfabric_video_3.mov, trustfabric_video_4.mov, trustfabric_video_5.mov" and trustfabric_video_6.mov. 
+For a video presentation of the application see files trustfabric_video_1.mov, trustfabric_video_2.mov, trustfabric_video_3.mov, trustfabric_video_4.mov, trustfabric_video_5.mov and trustfabric_video_6.mov. 
 
 
